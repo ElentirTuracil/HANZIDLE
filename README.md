@@ -14,6 +14,7 @@ Guess the correct two-character word when given only one of its characters.
 2. Guess the two-character word that contains it.
 3. Submit your answer and see if you’re correct.
 4. Use **Hint** for the pinyin, or **Reveal** for the full answer.
+5. Must switch to Chinese keyboard for play.
 
 ## Live Demo
 Once you enable GitHub Pages for this repository, your game will be playable here:  
