@@ -1,0 +1,1310 @@
+[
+  {
+    "word": "上海",
+    "pinyin": "Shànghǎi",
+    "def": "Shanghai (city)",
+    "given": "海"
+  },
+  {
+    "word": "海外",
+    "pinyin": "hǎiwài",
+    "def": "overseas",
+    "given": "海"
+  },
+  {
+    "word": "海洋",
+    "pinyin": "hǎiyáng",
+    "def": "ocean",
+    "given": "海"
+  },
+  {
+    "word": "文化",
+    "pinyin": "wénhuà",
+    "def": "culture",
+    "given": "化"
+  },
+  {
+    "word": "计划",
+    "pinyin": "jìhuà",
+    "def": "plan",
+    "given": "计"
+  },
+  {
+    "word": "条件",
+    "pinyin": "tiáojiàn",
+    "def": "condition",
+    "given": "件"
+  },
+  {
+    "word": "标准",
+    "pinyin": "biāozhǔn",
+    "def": "standard",
+    "given": "标"
+  },
+  {
+    "word": "效果",
+    "pinyin": "xiàoguǒ",
+    "def": "effect; result",
+    "given": "果"
+  },
+  {
+    "word": "解决",
+    "pinyin": "jiějué",
+    "def": "to solve",
+    "given": "解"
+  },
+  {
+    "word": "保护",
+    "pinyin": "bǎohù",
+    "def": "to protect",
+    "given": "护"
+  },
+  {
+    "word": "环境",
+    "pinyin": "huánjìng",
+    "def": "environment",
+    "given": "境"
+  },
+  {
+    "word": "经济",
+    "pinyin": "jīngjì",
+    "def": "economy",
+    "given": "经"
+  },
+  {
+    "word": "科学",
+    "pinyin": "kēxué",
+    "def": "science",
+    "given": "科"
+  },
+  {
+    "word": "技术",
+    "pinyin": "jìshù",
+    "def": "technology",
+    "given": "技"
+  },
+  {
+    "word": "贸易",
+    "pinyin": "màoyì",
+    "def": "trade",
+    "given": "贸"
+  },
+  {
+    "word": "资源",
+    "pinyin": "zīyuán",
+    "def": "resources",
+    "given": "资"
+  },
+  {
+    "word": "人口",
+    "pinyin": "rénkǒu",
+    "def": "population",
+    "given": "口"
+  },
+  {
+    "word": "教育",
+    "pinyin": "jiàoyù",
+    "def": "education",
+    "given": "教"
+  },
+  {
+    "word": "历史",
+    "pinyin": "lìshǐ",
+    "def": "history",
+    "given": "史"
+  },
+  {
+    "word": "文化遗产",
+    "pinyin": "wénhuàyíchǎn",
+    "def": "cultural heritage",
+    "given": "遗"
+  },
+  {
+    "word": "和平",
+    "pinyin": "hépíng",
+    "def": "peace",
+    "given": "和"
+  },
+  {
+    "word": "合作",
+    "pinyin": "hézuò",
+    "def": "cooperation",
+    "given": "合"
+  },
+  {
+    "word": "发展",
+    "pinyin": "fāzhǎn",
+    "def": "development",
+    "given": "发"
+  },
+  {
+    "word": "改革",
+    "pinyin": "gǎigé",
+    "def": "reform",
+    "given": "改"
+  },
+  {
+    "word": "创新",
+    "pinyin": "chuàngxīn",
+    "def": "innovation",
+    "given": "创"
+  },
+  {
+    "word": "法律",
+    "pinyin": "fǎlǜ",
+    "def": "law",
+    "given": "法"
+  },
+  {
+    "word": "制度",
+    "pinyin": "zhìdù",
+    "def": "system",
+    "given": "制"
+  },
+  {
+    "word": "民主",
+    "pinyin": "mínzhǔ",
+    "def": "democracy",
+    "given": "民"
+  },
+  {
+    "word": "自由",
+    "pinyin": "zìyóu",
+    "def": "freedom",
+    "given": "自"
+  },
+  {
+    "word": "责任",
+    "pinyin": "zérèn",
+    "def": "responsibility",
+    "given": "责"
+  },
+  {
+    "word": "联盟",
+    "pinyin": "liánméng",
+    "def": "alliance",
+    "given": "盟"
+  },
+  {
+    "word": "制裁",
+    "pinyin": "zhìcái",
+    "def": "sanctions",
+    "given": "制"
+  },
+  {
+    "word": "冲突",
+    "pinyin": "chōngtū",
+    "def": "conflict",
+    "given": "冲"
+  },
+  {
+    "word": "谈判",
+    "pinyin": "tánpàn",
+    "def": "negotiation",
+    "given": "谈"
+  },
+  {
+    "word": "协定",
+    "pinyin": "xiédìng",
+    "def": "agreement",
+    "given": "协"
+  },
+  {
+    "word": "条约",
+    "pinyin": "tiáoyuē",
+    "def": "treaty",
+    "given": "约"
+  },
+  {
+    "word": "撤军",
+    "pinyin": "chèjūn",
+    "def": "withdraw troops",
+    "given": "撤"
+  },
+  {
+    "word": "驻军",
+    "pinyin": "zhùjūn",
+    "def": "garrison troops",
+    "given": "驻"
+  },
+  {
+    "word": "防御",
+    "pinyin": "fángyù",
+    "def": "defense",
+    "given": "防"
+  },
+  {
+    "word": "进攻",
+    "pinyin": "jìngōng",
+    "def": "attack",
+    "given": "攻"
+  },
+  {
+    "word": "导弹",
+    "pinyin": "dǎodàn",
+    "def": "missile",
+    "given": "弹"
+  },
+  {
+    "word": "舰艇",
+    "pinyin": "jiàntǐng",
+    "def": "naval vessels",
+    "given": "舰"
+  },
+  {
+    "word": "潜艇",
+    "pinyin": "qiántǐng",
+    "def": "submarine",
+    "given": "艇"
+  },
+  {
+    "word": "航母",
+    "pinyin": "hángmǔ",
+    "def": "aircraft carrier",
+    "given": "航"
+  },
+  {
+    "word": "巡逻",
+    "pinyin": "xúnluó",
+    "def": "patrol",
+    "given": "巡"
+  },
+  {
+    "word": "侦察",
+    "pinyin": "zhēnchá",
+    "def": "reconnaissance",
+    "given": "侦"
+  },
+  {
+    "word": "监听",
+    "pinyin": "jiāntīng",
+    "def": "intercept communications",
+    "given": "听"
+  },
+  {
+    "word": "监听设备",
+    "pinyin": "jiāntīng shèbèi",
+    "def": "listening devices",
+    "given": "设"
+  },
+  {
+    "word": "网络安全",
+    "pinyin": "wǎngluò ānquán",
+    "def": "cybersecurity",
+    "given": "安"
+  },
+  {
+    "word": "数据泄露",
+    "pinyin": "shùjù xièlòu",
+    "def": "data leak",
+    "given": "泄"
+  },
+  {
+    "word": "加密",
+    "pinyin": "jiāmì",
+    "def": "encryption",
+    "given": "密"
+  },
+  {
+    "word": "解密",
+    "pinyin": "jiěmì",
+    "def": "decryption",
+    "given": "密"
+  },
+  {
+    "word": "信号",
+    "pinyin": "xìnhào",
+    "def": "signal",
+    "given": "信"
+  },
+  {
+    "word": "频率",
+    "pinyin": "pínlǜ",
+    "def": "frequency",
+    "given": "频"
+  },
+  {
+    "word": "卫星",
+    "pinyin": "wèixīng",
+    "def": "satellite",
+    "given": "卫"
+  },
+  {
+    "word": "轨道",
+    "pinyin": "guǐdào",
+    "def": "orbit",
+    "given": "轨"
+  },
+  {
+    "word": "发射",
+    "pinyin": "fāshè",
+    "def": "launch",
+    "given": "射"
+  },
+  {
+    "word": "侦测",
+    "pinyin": "zhēncè",
+    "def": "to detect",
+    "given": "测"
+  },
+  {
+    "word": "侦查",
+    "pinyin": "zhēnchá",
+    "def": "investigation",
+    "given": "查"
+  },
+  {
+    "word": "部署",
+    "pinyin": "bùshǔ",
+    "def": "deployment",
+    "given": "部"
+  },
+  {
+    "word": "撤离",
+    "pinyin": "chèlí",
+    "def": "evacuate",
+    "given": "撤"
+  },
+  {
+    "word": "维和",
+    "pinyin": "wéihé",
+    "def": "peacekeeping",
+    "given": "维"
+  },
+  {
+    "word": "干预",
+    "pinyin": "gānyù",
+    "def": "intervention",
+    "given": "干"
+  },
+  {
+    "word": "调解",
+    "pinyin": "tiáojiě",
+    "def": "mediate",
+    "given": "调"
+  },
+  {
+    "word": "缓和",
+    "pinyin": "huǎnhé",
+    "def": "to ease",
+    "given": "缓"
+  },
+  {
+    "word": "裁军",
+    "pinyin": "cáijūn",
+    "def": "disarmament",
+    "given": "裁"
+  },
+  {
+    "word": "禁运",
+    "pinyin": "jìnyùn",
+    "def": "embargo",
+    "given": "禁"
+  },
+  {
+    "word": "封锁",
+    "pinyin": "fēngsuǒ",
+    "def": "blockade",
+    "given": "封"
+  },
+  {
+    "word": "突破",
+    "pinyin": "tūpò",
+    "def": "breakthrough",
+    "given": "突"
+  },
+  {
+    "word": "占领",
+    "pinyin": "zhànlǐng",
+    "def": "occupation",
+    "given": "占"
+  },
+  {
+    "word": "占据",
+    "pinyin": "zhànjù",
+    "def": "to occupy",
+    "given": "占"
+  },
+  {
+    "word": "入侵",
+    "pinyin": "rùqīn",
+    "def": "invasion",
+    "given": "侵"
+  },
+  {
+    "word": "扩张",
+    "pinyin": "kuòzhāng",
+    "def": "expansion",
+    "given": "扩"
+  },
+  {
+    "word": "压制",
+    "pinyin": "yāzhì",
+    "def": "suppression",
+    "given": "压"
+  },
+  {
+    "word": "镇压",
+    "pinyin": "zhènyā",
+    "def": "repression",
+    "given": "镇"
+  },
+  {
+    "word": "反抗",
+    "pinyin": "fǎnkàng",
+    "def": "resistance",
+    "given": "抗"
+  },
+  {
+    "word": "抵抗",
+    "pinyin": "dǐkàng",
+    "def": "resist",
+    "given": "抗"
+  },
+  {
+    "word": "撤退",
+    "pinyin": "chètuì",
+    "def": "retreat",
+    "given": "撤"
+  },
+  {
+    "word": "防范",
+    "pinyin": "fángfàn",
+    "def": "precaution",
+    "given": "防"
+  },
+  {
+    "word": "戒备",
+    "pinyin": "jièbèi",
+    "def": "alert",
+    "given": "戒"
+  },
+  {
+    "word": "隐蔽",
+    "pinyin": "yǐnbì",
+    "def": "conceal",
+    "given": "隐"
+  },
+  {
+    "word": "掩护",
+    "pinyin": "yǎnhù",
+    "def": "cover (military)",
+    "given": "掩"
+  },
+  {
+    "word": "侦听",
+    "pinyin": "zhēntīng",
+    "def": "signal monitoring",
+    "given": "听"
+  },
+  {
+    "word": "侦破",
+    "pinyin": "zhēnpò",
+    "def": "to solve a case",
+    "given": "破"
+  },
+  {
+    "word": "破解",
+    "pinyin": "pòjiě",
+    "def": "to crack (a code)",
+    "given": "破"
+  },
+  {
+    "word": "防护",
+    "pinyin": "fánghù",
+    "def": "protection",
+    "given": "护"
+  },
+  {
+    "word": "掩饰",
+    "pinyin": "yǎnshì",
+    "def": "cover up",
+    "given": "掩"
+  },
+  {
+    "word": "暴露",
+    "pinyin": "bàolù",
+    "def": "expose",
+    "given": "露"
+  },
+  {
+    "word": "泄密",
+    "pinyin": "xièmì",
+    "def": "leak secrets",
+    "given": "泄"
+  },
+  {
+    "word": "暗杀",
+    "pinyin": "ànshā",
+    "def": "assassinate",
+    "given": "杀"
+  },
+  {
+    "word": "破坏",
+    "pinyin": "pòhuài",
+    "def": "to sabotage",
+    "given": "破"
+  },
+  {
+    "word": "毁灭",
+    "pinyin": "huǐmiè",
+    "def": "destroy",
+    "given": "毁"
+  },
+  {
+    "word": "摧毁",
+    "pinyin": "cuīhuǐ",
+    "def": "demolish",
+    "given": "毁"
+  },
+  {
+    "word": "屠杀",
+    "pinyin": "túshā",
+    "def": "massacre",
+    "given": "屠"
+  },
+  {
+    "word": "清剿",
+    "pinyin": "qīngjiǎo",
+    "def": "mop-up operation",
+    "given": "剿"
+  },
+  {
+    "word": "镇守",
+    "pinyin": "zhènshǒu",
+    "def": "garrison",
+    "given": "镇"
+  },
+  {
+    "word": "镇定",
+    "pinyin": "zhèndìng",
+    "def": "calm, composed",
+    "given": "镇"
+  },
+  {
+    "word": "战役",
+    "pinyin": "zhànyì",
+    "def": "battle, campaign",
+    "given": "战"
+  },
+  {
+    "word": "战术",
+    "pinyin": "zhànshù",
+    "def": "tactics",
+    "given": "战"
+  },
+  {
+    "word": "军演",
+    "pinyin": "jūnyǎn",
+    "def": "military exercise",
+    "given": "军"
+  },
+  {
+    "word": "部队",
+    "pinyin": "bùduì",
+    "def": "troops, army unit",
+    "given": "部"
+  },
+  {
+    "word": "司令",
+    "pinyin": "sīlìng",
+    "def": "commander",
+    "given": "令"
+  },
+  {
+    "word": "指挥",
+    "pinyin": "zhǐhuī",
+    "def": "command, direct",
+    "given": "指"
+  },
+  {
+    "word": "武装",
+    "pinyin": "wǔzhuāng",
+    "def": "armed forces",
+    "given": "武"
+  },
+  {
+    "word": "装甲",
+    "pinyin": "zhuāngjiǎ",
+    "def": "armor",
+    "given": "甲"
+  },
+  {
+    "word": "防空",
+    "pinyin": "fángkōng",
+    "def": "air defense",
+    "given": "空"
+  },
+  {
+    "word": "空军",
+    "pinyin": "kōngjūn",
+    "def": "air force",
+    "given": "空"
+  },
+  {
+    "word": "陆军",
+    "pinyin": "lùjūn",
+    "def": "army (land forces)",
+    "given": "陆"
+  },
+  {
+    "word": "海军",
+    "pinyin": "hǎijūn",
+    "def": "navy",
+    "given": "海"
+  },
+  {
+    "word": "战略",
+    "pinyin": "zhànlüè",
+    "def": "strategy",
+    "given": "略"
+  },
+  {
+    "word": "敌方",
+    "pinyin": "dífāng",
+    "def": "the enemy",
+    "given": "敌"
+  },
+  {
+    "word": "友军",
+    "pinyin": "yǒujūn",
+    "def": "friendly forces",
+    "given": "友"
+  },
+  {
+    "word": "前线",
+    "pinyin": "qiánxiàn",
+    "def": "front line",
+    "given": "线"
+  },
+  {
+    "word": "后勤",
+    "pinyin": "hòuqín",
+    "def": "logistics",
+    "given": "勤"
+  },
+  {
+    "word": "补给",
+    "pinyin": "bǔjǐ",
+    "def": "supply, replenish",
+    "given": "补"
+  },
+  {
+    "word": "弹药",
+    "pinyin": "dànyào",
+    "def": "ammunition",
+    "given": "弹"
+  },
+  {
+    "word": "武器",
+    "pinyin": "wǔqì",
+    "def": "weapon",
+    "given": "器"
+  },
+  {
+    "word": "爆炸",
+    "pinyin": "bàozhà",
+    "def": "explosion",
+    "given": "爆"
+  },
+  {
+    "word": "引爆",
+    "pinyin": "yǐnbào",
+    "def": "to detonate",
+    "given": "引"
+  },
+  {
+    "word": "袭击",
+    "pinyin": "xíjī",
+    "def": "raid, attack",
+    "given": "袭"
+  },
+  {
+    "word": "投降",
+    "pinyin": "tóuxiáng",
+    "def": "surrender",
+    "given": "投"
+  },
+  {
+    "word": "胜利",
+    "pinyin": "shènglì",
+    "def": "victory",
+    "given": "胜"
+  },
+  {
+    "word": "失败",
+    "pinyin": "shībài",
+    "def": "failure, defeat",
+    "given": "败"
+  },
+  {
+    "word": "战俘",
+    "pinyin": "zhànfú",
+    "def": "prisoner of war",
+    "given": "俘"
+  },
+  {
+    "word": "外交",
+    "pinyin": "wàijiāo",
+    "def": "diplomacy",
+    "given": "交"
+  },
+  {
+    "word": "联合",
+    "pinyin": "liánhé",
+    "def": "to unite; united",
+    "given": "联"
+  },
+  {
+    "word": "主权",
+    "pinyin": "zhǔquán",
+    "def": "sovereignty",
+    "given": "权"
+  },
+  {
+    "word": "政权",
+    "pinyin": "zhèngquán",
+    "def": "political power; regime",
+    "given": "政"
+  },
+  {
+    "word": "财政",
+    "pinyin": "cáizhèng",
+    "def": "public finance",
+    "given": "财"
+  },
+  {
+    "word": "赤字",
+    "pinyin": "chìzì",
+    "def": "deficit",
+    "given": "赤"
+  },
+  {
+    "word": "盈余",
+    "pinyin": "yíngyú",
+    "def": "surplus",
+    "given": "盈"
+  },
+  {
+    "word": "投资",
+    "pinyin": "tóuzī",
+    "def": "investment",
+    "given": "投"
+  },
+  {
+    "word": "股市",
+    "pinyin": "gǔshì",
+    "def": "stock market",
+    "given": "股"
+  },
+  {
+    "word": "汇率",
+    "pinyin": "huìlǜ",
+    "def": "exchange rate",
+    "given": "率"
+  },
+  {
+    "word": "通货膨胀",
+    "pinyin": "tōnghuò péngzhàng",
+    "def": "inflation",
+    "given": "货"
+  },
+  {
+    "word": "贸易顺差",
+    "pinyin": "màoyì shùnchā",
+    "def": "trade surplus",
+    "given": "差"
+  },
+  {
+    "word": "贸易逆差",
+    "pinyin": "màoyì nìchā",
+    "def": "trade deficit",
+    "given": "差"
+  },
+  {
+    "word": "能源",
+    "pinyin": "néngyuán",
+    "def": "energy resources",
+    "given": "能"
+  },
+  {
+    "word": "核能",
+    "pinyin": "hénéng",
+    "def": "nuclear energy",
+    "given": "核"
+  },
+  {
+    "word": "太阳能",
+    "pinyin": "tàiyángnéng",
+    "def": "solar energy",
+    "given": "阳"
+  },
+  {
+    "word": "风能",
+    "pinyin": "fēngnéng",
+    "def": "wind energy",
+    "given": "风"
+  },
+  {
+    "word": "地热能",
+    "pinyin": "dìrènéng",
+    "def": "geothermal energy",
+    "given": "热"
+  },
+  {
+    "word": "化石燃料",
+    "pinyin": "huàshí ránliào",
+    "def": "fossil fuel",
+    "given": "化"
+  },
+  {
+    "word": "温室效应",
+    "pinyin": "wēnshì xiàoyìng",
+    "def": "greenhouse effect",
+    "given": "室"
+  },
+  {
+    "word": "气候变化",
+    "pinyin": "qìhòu biànhuà",
+    "def": "climate change",
+    "given": "变"
+  },
+  {
+    "word": "粮食安全",
+    "pinyin": "liángshi ānquán",
+    "def": "food security",
+    "given": "粮"
+  },
+  {
+    "word": "水资源",
+    "pinyin": "shuǐ zīyuán",
+    "def": "water resources",
+    "given": "水"
+  },
+  {
+    "word": "荒漠化",
+    "pinyin": "huāngmòhuà",
+    "def": "desertification",
+    "given": "荒"
+  },
+  {
+    "word": "生物多样性",
+    "pinyin": "shēngwù duōyàngxìng",
+    "def": "biodiversity",
+    "given": "物"
+  },
+  {
+    "word": "生态系统",
+    "pinyin": "shēngtài xìtǒng",
+    "def": "ecosystem",
+    "given": "系"
+  },
+  {
+    "word": "航天",
+    "pinyin": "hángtiān",
+    "def": "space flight",
+    "given": "航"
+  },
+  {
+    "word": "宇宙",
+    "pinyin": "yǔzhòu",
+    "def": "universe",
+    "given": "宙"
+  },
+  {
+    "word": "探测",
+    "pinyin": "tàncè",
+    "def": "to probe; to explore",
+    "given": "探"
+  },
+  {
+    "word": "火箭",
+    "pinyin": "huǒjiàn",
+    "def": "rocket",
+    "given": "箭"
+  },
+  {
+    "word": "登陆",
+    "pinyin": "dēnglù",
+    "def": "to land; to log in",
+    "given": "陆"
+  },
+  {
+    "word": "登陆器",
+    "pinyin": "dēnglùqì",
+    "def": "lander (spacecraft)",
+    "given": "陆"
+  },
+  {
+    "word": "深海",
+    "pinyin": "shēnhǎi",
+    "def": "deep sea",
+    "given": "深"
+  },
+  {
+    "word": "舰队",
+    "pinyin": "jiànduì",
+    "def": "fleet (naval)",
+    "given": "舰"
+  },
+  {
+    "word": "演习",
+    "pinyin": "yǎnxí",
+    "def": "military drill; exercise",
+    "given": "习"
+  },
+  {
+    "word": "攻击",
+    "pinyin": "gōngjī",
+    "def": "attack",
+    "given": "击"
+  },
+  {
+    "word": "和平条约",
+    "pinyin": "hépíng tiáoyuē",
+    "def": "peace treaty",
+    "given": "条"
+  },
+  {
+    "word": "危机",
+    "pinyin": "wēijī",
+    "def": "crisis",
+    "given": "危"
+  },
+  {
+    "word": "机遇",
+    "pinyin": "jīyù",
+    "def": "opportunity",
+    "given": "遇"
+  },
+  {
+    "word": "挑战",
+    "pinyin": "tiǎozhàn",
+    "def": "challenge",
+    "given": "挑"
+  },
+  {
+    "word": "竞争",
+    "pinyin": "jìngzhēng",
+    "def": "competition",
+    "given": "竞"
+  },
+  {
+    "word": "合作伙伴",
+    "pinyin": "hézuò huǒbàn",
+    "def": "partner",
+    "given": "伙"
+  },
+  {
+    "word": "供应链",
+    "pinyin": "gōngyìngliàn",
+    "def": "supply chain",
+    "given": "链"
+  },
+  {
+    "word": "人工智能",
+    "pinyin": "réngōng zhìnéng",
+    "def": "artificial intelligence",
+    "given": "能"
+  },
+  {
+    "word": "大数据",
+    "pinyin": "dà shùjù",
+    "def": "big data",
+    "given": "据"
+  },
+  {
+    "word": "信息化",
+    "pinyin": "xìnxīhuà",
+    "def": "informatization",
+    "given": "信"
+  },
+  {
+    "word": "量子计算",
+    "pinyin": "liàngzǐ jìsuàn",
+    "def": "quantum computing",
+    "given": "量"
+  },
+  {
+    "word": "霸权",
+    "pinyin": "bàquán",
+    "def": "hegemony; dominance",
+    "given": "霸"
+  },
+  {
+    "word": "撤销",
+    "pinyin": "chèxiāo",
+    "def": "to rescind; to revoke",
+    "given": "撤"
+  },
+  {
+    "word": "谴责",
+    "pinyin": "qiǎnzé",
+    "def": "to condemn; denounce",
+    "given": "谴"
+  },
+  {
+    "word": "领土",
+    "pinyin": "lǐngtǔ",
+    "def": "territory",
+    "given": "领"
+  },
+  {
+    "word": "疆界",
+    "pinyin": "jiāngjiè",
+    "def": "border; boundary",
+    "given": "疆"
+  },
+  {
+    "word": "争端",
+    "pinyin": "zhēngduān",
+    "def": "dispute; conflict",
+    "given": "争"
+  },
+  {
+    "word": "停火",
+    "pinyin": "tínghuǒ",
+    "def": "ceasefire",
+    "given": "停"
+  },
+  {
+    "word": "交涉",
+    "pinyin": "jiāoshè",
+    "def": "to negotiate; to bargain",
+    "given": "涉"
+  },
+  {
+    "word": "妥协",
+    "pinyin": "tuǒxié",
+    "def": "compromise",
+    "given": "妥"
+  },
+  {
+    "word": "制衡",
+    "pinyin": "zhìhéng",
+    "def": "to check and balance",
+    "given": "衡"
+  },
+  {
+    "word": "宪法",
+    "pinyin": "xiànfǎ",
+    "def": "constitution (law)",
+    "given": "宪"
+  },
+  {
+    "word": "议会",
+    "pinyin": "yìhuì",
+    "def": "parliament; legislative assembly",
+    "given": "议"
+  },
+  {
+    "word": "选举",
+    "pinyin": "xuǎnjǔ",
+    "def": "election",
+    "given": "选"
+  },
+  {
+    "word": "普选",
+    "pinyin": "pǔxuǎn",
+    "def": "universal suffrage",
+    "given": "普"
+  },
+  {
+    "word": "投票",
+    "pinyin": "tóupiào",
+    "def": "to vote; ballot",
+    "given": "票"
+  },
+  {
+    "word": "腐败",
+    "pinyin": "fǔbài",
+    "def": "corruption",
+    "given": "腐"
+  },
+  {
+    "word": "贿赂",
+    "pinyin": "huìlù",
+    "def": "bribery; to bribe",
+    "given": "贿"
+  },
+  {
+    "word": "渗透",
+    "pinyin": "shèntòu",
+    "def": "to infiltrate; to permeate",
+    "given": "渗"
+  },
+  {
+    "word": "颠覆",
+    "pinyin": "diānfù",
+    "def": "to subvert; to overthrow",
+    "given": "颠"
+  },
+  {
+    "word": "颁布",
+    "pinyin": "bānbù",
+    "def": "to promulgate; to issue formally",
+    "given": "颁"
+  },
+  {
+    "word": "废除",
+    "pinyin": "fèichú",
+    "def": "to abolish",
+    "given": "废"
+  },
+  {
+    "word": "采纳",
+    "pinyin": "cǎinà",
+    "def": "to adopt (an idea or proposal)",
+    "given": "采"
+  },
+  {
+    "word": "维持",
+    "pinyin": "wéichí",
+    "def": "to maintain; to preserve",
+    "given": "维"
+  },
+  {
+    "word": "约束",
+    "pinyin": "yuēshù",
+    "def": "to restrain; constraint",
+    "given": "约"
+  },
+  {
+    "word": "违背",
+    "pinyin": "wéibèi",
+    "def": "to violate; to go against",
+    "given": "违"
+  },
+  {
+    "word": "遵守",
+    "pinyin": "zūnshǒu",
+    "def": "to comply with; to abide by",
+    "given": "遵"
+  },
+  {
+    "word": "强制",
+    "pinyin": "qiángzhì",
+    "def": "to enforce; to compel",
+    "given": "强"
+  },
+  {
+    "word": "通货紧缩",
+    "pinyin": "tōnghuò jǐnsuō",
+    "def": "deflation",
+    "given": "缩"
+  },
+  {
+    "word": "税收",
+    "pinyin": "shuìshōu",
+    "def": "tax revenue",
+    "given": "税"
+  },
+  {
+    "word": "投资组合",
+    "pinyin": "tóuzī zǔhé",
+    "def": "investment portfolio",
+    "given": "组"
+  },
+  {
+    "word": "资产负债表",
+    "pinyin": "zīchǎn fùzhàibiǎo",
+    "def": "balance sheet",
+    "given": "负"
+  },
+  {
+    "word": "关税",
+    "pinyin": "guānshuì",
+    "def": "tariff; customs duty",
+    "given": "税"
+  },
+  {
+    "word": "跨国公司",
+    "pinyin": "kuàguó gōngsī",
+    "def": "multinational corporation",
+    "given": "跨"
+  },
+  {
+    "word": "上市公司",
+    "pinyin": "shàngshì gōngsī",
+    "def": "publicly listed company",
+    "given": "市"
+  },
+  {
+    "word": "创业板",
+    "pinyin": "chuàngyè bǎn",
+    "def": "growth enterprise board (stock market)",
+    "given": "创"
+  },
+  {
+    "word": "能源危机",
+    "pinyin": "néngyuán wēijī",
+    "def": "energy crisis",
+    "given": "危"
+  },
+  {
+    "word": "可再生能源",
+    "pinyin": "kě zàishēng néngyuán",
+    "def": "renewable energy",
+    "given": "再"
+  },
+  {
+    "word": "碳排放",
+    "pinyin": "tàn páifàng",
+    "def": "carbon emissions",
+    "given": "排"
+  },
+  {
+    "word": "核聚变",
+    "pinyin": "hé jùbiàn",
+    "def": "nuclear fusion",
+    "given": "聚"
+  },
+  {
+    "word": "核裂变",
+    "pinyin": "hé lièbiàn",
+    "def": "nuclear fission",
+    "given": "裂"
+  },
+  {
+    "word": "区块链",
+    "pinyin": "qūkuài liàn",
+    "def": "blockchain",
+    "given": "块"
+  },
+  {
+    "word": "深度学习",
+    "pinyin": "shēndù xuéxí",
+    "def": "deep learning",
+    "given": "深"
+  },
+  {
+    "word": "虚拟现实",
+    "pinyin": "xūnǐ xiànshí",
+    "def": "virtual reality",
+    "given": "虚"
+  },
+  {
+    "word": "增强现实",
+    "pinyin": "zēngqiáng xiànshí",
+    "def": "augmented reality",
+    "given": "增"
+  },
+  {
+    "word": "媒体融合",
+    "pinyin": "méitǐ rónghé",
+    "def": "media convergence",
+    "given": "融"
+  },
+  {
+    "word": "新闻发布会",
+    "pinyin": "xīnwén fābùhuì",
+    "def": "press conference",
+    "given": "布"
+  },
+  {
+    "word": "舆论导向",
+    "pinyin": "yúlùn dǎoxiàng",
+    "def": "public opinion guidance",
+    "given": "舆"
+  }
+]
