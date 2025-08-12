@@ -3,66 +3,56 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chinese Character Word Guess</title>
+<title>HANZIDLE — Chinese Character Word Guess</title>
 <style>
-  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-         display:flex; flex-direction:column; align-items:center; background:#f4f4f4; margin:0; padding:24px; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; display:flex; flex-direction:column; align-items:center; background:#f4f4f4; margin:0; padding:24px; }
   h1 { margin: 0 0 8px 0; }
   .topbar { display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap; }
   .btn { cursor:pointer; border:none; border-radius:10px; padding:10px 14px; background:#222; color:#fff; font-weight:600; }
   .btn:disabled { opacity:.6; cursor:not-allowed; }
   .character { font-size:84px; margin-top:28px; }
-  .meta { margin-top:8px; font-size:14px; color:#444; min-height:1.2em; }
+  .meta { margin-top:8px; font-size:14px; color:#444; }
   .guess-input { margin-top:16px; display:flex; gap:10px; }
   input { font-size:24px; text-align:center; padding:10px; width:100px; border-radius:10px; border:1px solid #ccc; }
   .attempts { margin-top:10px; }
-  .feedback { display:flex; margin-top:12px; }
+  .feedback { display:flex; margin-top:12px; flex-wrap:wrap; }
   .tile { width:56px; height:56px; display:flex; align-items:center; justify-content:center; font-size:30px; margin:5px; background:#ddd; border-radius:8px; }
   .correct { background:#6aaa64; color:#fff; }
   .misplaced { background:#c9b458; color:#fff; }
   .wrong { background:#787c7e; color:#fff; }
   #result { margin-top:12px; font-weight:700; min-height:1.2em; }
-  .footer { margin-top:16px; font-size:15px; color:#222; }
-  .auto { font-size:13px; color:#666; margin-top:6px; }
+  .footer { margin-top:16px; font-size:15px; color:#222; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .hintline { color:#333; }
 </style>
 </head>
 <body>
   <h1>Chinese Character Word Guess</h1>
   <div class="topbar">
-    <button class="btn" id="newWordBtn">New Challenge</button>
+    <button class="btn" id="nextBtn">Next</button>
     <button class="btn" id="resetBtn">Reset</button>
     <button class="btn" id="revealBtn">Reveal</button>
     <button class="btn" id="hintBtn">Hint</button>
   </div>
 
-  <div class="character" id="givenChar">—</div>
-  <div class="meta" id="hint">Loading word list…</div>
+  <div class="character" id="givenChar">海</div>
+  <div class="meta" id="hint" class="hintline">Guess the 2-character word that includes the big character.</div>
 
   <div class="guess-input">
     <input id="guess" maxlength="2" placeholder="输入两个字" />
-    <button class="btn" id="submitBtn" onclick="makeGuess()" disabled>Submit</button>
+    <button class="btn" id="submitBtn">Submit</button>
   </div>
   <div class="attempts">Attempts left: <span id="attempts">5</span></div>
 
   <div id="feedback"></div>
   <div id="result"></div>
-  <div class="auto" id="autoNextMsg"></div>
-  <div class="footer" id="reveal"></div>
+  <div class="footer">
+    <span id="reveal"></span>
+  </div>
 
 <script>
-  // ---- Load external words.json (and only fall back if it truly fails) ----
-  let WORDS = [];
-
-  async function loadWords() {
-    const res = await fetch('words.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) throw new Error('Empty/invalid words.json');
-    return data;
-  }
-
-  // Small fallback ONLY if fetch/parse fails
-  const FALLBACK = [
+  // === Data source ===
+  // If you’re using words.json, keep this array as a fallback and call loadWords() on start.
+  let WORDS = [
     { word: "上海", pinyin: "Shànghǎi", def: "Shanghai (city)", given: "海" },
     { word: "海外", pinyin: "hǎiwài", def: "overseas", given: "海" },
     { word: "海洋", pinyin: "hǎiyáng", def: "ocean", given: "海" },
@@ -75,58 +65,78 @@
     { word: "保护", pinyin: "bǎohù", def: "to protect", given: "护" }
   ];
 
-  // Shortcuts
   const $ = (id) => document.getElementById(id);
   const attemptsEl = $('attempts');
   const feedbackEl = $('feedback');
   const resultEl = $('result');
   const revealEl = $('reveal');
-  const hintTextEl = $('hint');
+  const hintEl = $('hint');
   const guessInput = $('guess');
+
   const submitBtn = $('submitBtn');
-  const givenCharEl = $('givenChar');
+  const nextBtn = $('nextBtn');
+  const resetBtn = $('resetBtn');
   const revealBtn = $('revealBtn');
   const hintBtn = $('hintBtn');
-  const autoNextMsg = $('autoNextMsg');
-  const newWordBtn = $('newWordBtn');
-  const resetBtn = $('resetBtn');
+  const givenCharEl = $('givenChar');
 
-  // State
-  let state = { target: null, attempts: 5, finished: false };
-  let autoNextTimer = null;
-  let autoNextTicker = null;
-  const AUTO_NEXT_SECONDS = 3;
+  let state = {
+    target: null,
+    attempts: 5,
+    finished: false
+  };
 
-  function pickWord() {
-    return WORDS[Math.floor(Math.random() * WORDS.length)];
-  }
-
-  function setTarget(w) {
-    clearAutoNext();
-    state.target = w;
-    givenCharEl.textContent = w.given;
-    hintTextEl.textContent = 'Guess the 2-character word that includes: ' + w.given;
-    reset(false);
-  }
-
-  function reset(clearWord = true) {
-    clearAutoNext();
+  // --- Round lifecycle ---
+  function startRound(newWord = true) {
     state.attempts = 5;
     state.finished = false;
     attemptsEl.textContent = state.attempts;
     feedbackEl.innerHTML = '';
     resultEl.textContent = '';
     revealEl.textContent = '';
-    autoNextMsg.textContent = '';
-    submitBtn.disabled = false;
-    guessInput.disabled = false;
-    revealBtn.disabled = false;
+    hintEl.textContent = 'Guess the 2-character word that includes the big character.';
     hintBtn.disabled = false;
+
+    submitBtn.disabled = false;
+    revealBtn.disabled = false;
+    guessInput.disabled = false;
     guessInput.value = '';
     guessInput.focus();
-    if (clearWord) setTarget(pickWord());
+
+    // Disable "Next" while playing; it only becomes enabled after the round ends.
+    nextBtn.disabled = true;
+
+    if (newWord) {
+      const w = pickRandom();
+      setTarget(w);
+    } else if (state.target) {
+      setTarget(state.target);
+    }
   }
 
+  function endRound(message = '') {
+    state.finished = true;
+    submitBtn.disabled = true;
+    guessInput.disabled = true;
+    revealBtn.disabled = true;
+    hintBtn.disabled = true;
+    if (message) resultEl.textContent = message;
+
+    // Enable manual progression.
+    nextBtn.disabled = false;
+  }
+
+  // --- Word selection ---
+  function pickRandom() {
+    return WORDS[Math.floor(Math.random() * WORDS.length)];
+  }
+
+  function setTarget(w) {
+    state.target = w;
+    givenCharEl.textContent = w.given;
+  }
+
+  // --- UI helpers ---
   function colorRow(guess, answer) {
     const row = document.createElement('div');
     row.className = 'feedback';
@@ -142,48 +152,43 @@
     feedbackEl.appendChild(row);
   }
 
-  function showMessage(msg) { resultEl.textContent = msg; }
-
   function reveal() {
     const { word, pinyin, def } = state.target;
     revealEl.textContent = `${word}  ·  ${pinyin}  ·  ${def}`;
   }
 
-  function revealNow() {
-    if (state.finished) return;
-    showMessage('👀 Revealed early');
-    reveal();
-    endGame();
-  }
-
   function showHint() {
     if (state.finished) return;
-    const hintText = `Hint: ${state.target.def}`;
-    hintTextEl.textContent = hintText;
+    hintEl.textContent = `Hint: ${state.target.def}`;
     hintBtn.disabled = true;
   }
 
+  // --- Game actions ---
   function makeGuess() {
     if (state.finished) return;
     const raw = guessInput.value.trim();
-    if (raw.length !== 2) return showMessage('Please enter exactly two Chinese characters.');
-    if (!raw.includes(state.target.given)) return showMessage('Your guess must include: ' + state.target.given);
+    if (raw.length !== 2) {
+      resultEl.textContent = 'Please enter exactly two Chinese characters.';
+      return;
+    }
+    if (!raw.includes(state.target.given)) {
+      resultEl.textContent = 'Your guess must include: ' + state.target.given;
+      return;
+    }
 
     colorRow(raw, state.target.word);
     state.attempts--;
     attemptsEl.textContent = state.attempts;
 
     if (raw === state.target.word) {
-      showMessage('🎉 Correct!');
-      reveal();
-      endGame();
+      reveal(); // show word + pinyin + def
+      endRound('🎉 Correct! (Click Next when ready)');
       return;
     }
 
     if (state.attempts <= 0) {
-      showMessage('❌ Out of attempts!');
       reveal();
-      endGame();
+      endRound('❌ Out of attempts. (Click Next when ready)');
       return;
     }
 
@@ -191,57 +196,44 @@
     guessInput.focus();
   }
 
-  function endGame() {
-    state.finished = true;
-    submitBtn.disabled = true;
-    guessInput.disabled = true;
-    revealBtn.disabled = true;
-    hintBtn.disabled = true;
-    startAutoNext();
+  function revealNow() {
+    if (state.finished) return;
+    reveal();
+    endRound('👀 Revealed. (Click Next when ready)');
   }
 
-  function startAutoNext() {
-    let remaining = AUTO_NEXT_SECONDS;
-    autoNextMsg.textContent = `Next challenge in ${remaining}s… (or click “New Challenge” to skip)`;
-    clearAutoNext();
-    autoNextTicker = setInterval(() => {
-      remaining -= 1;
-      if (remaining <= 0) return;
-      autoNextMsg.textContent = `Next challenge in ${remaining}s… (or click “New Challenge” to skip)`;
-    }, 1000);
-    autoNextTimer = setTimeout(() => {
-      clearAutoNext();
-      setTarget(pickWord());
-    }, AUTO_NEXT_SECONDS * 1000);
+  function resetSameWord() {
+    // Restart the current word from scratch (study-friendly)
+    startRound(false);
   }
 
-  function clearAutoNext() {
-    if (autoNextTimer) { clearTimeout(autoNextTimer); autoNextTimer = null; }
-    if (autoNextTicker) { clearInterval(autoNextTicker); autoNextTicker = null; }
-    autoNextMsg.textContent = '';
+  // --- Optional: load external words.json if present ---
+  async function loadWords() {
+    try {
+      const res = await fetch('words.json', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          WORDS = data;
+        }
+      }
+    } catch (e) {
+      // If fetch fails, fallback WORDS stays in place.
+    }
   }
 
-  // Events
+  // --- Events ---
+  submitBtn.addEventListener('click', makeGuess);
   guessInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') makeGuess(); });
-  newWordBtn.addEventListener('click', () => { clearAutoNext(); setTarget(pickWord()); });
-  resetBtn.addEventListener('click', () => { clearAutoNext(); reset(true); });
   revealBtn.addEventListener('click', revealNow);
   hintBtn.addEventListener('click', showHint);
+  nextBtn.addEventListener('click', () => startRound(true));
+  resetBtn.addEventListener('click', resetSameWord);
 
-  // ---- Init: load external JSON first, then start game ----
+  // --- Init ---
   (async function init() {
-    try {
-      WORDS = await loadWords();
-      hintTextEl.textContent = `Loaded ${WORDS.length} words. Click New Challenge to begin.`;
-    } catch (e) {
-      console.warn('Using fallback list:', e);
-      WORDS = FALLBACK;
-      hintTextEl.textContent = `Couldn’t load words.json; using fallback (${WORDS.length}).`;
-    }
-    submitBtn.disabled = false;
-    setTarget(pickWord());
-    // Helpful for debugging: open DevTools console and run WORDS.length
-    console.log('WORDS loaded:', WORDS.length);
+    await loadWords();
+    startRound(true);
   })();
 </script>
 </body>
