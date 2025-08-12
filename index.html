@@ -112,6 +112,14 @@ function revealAnswer() {
 
 document.getElementById('newWordBtn').addEventListener('click', newChallenge);
 document.getElementById('resetBtn').addEventListener('click', newChallenge);
+
+// Allow Enter key to submit the guess
+document.getElementById('guess').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    makeGuess();
+  }
+});
 </script>
 
 </body>
