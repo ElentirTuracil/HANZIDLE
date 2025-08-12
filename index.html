@@ -5,122 +5,201 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HANZIDLE - Chinese Character Word Guess</title>
 <style>
-  body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-  .character { font-size: 5em; margin: 20px; }
-  .btn { padding: 10px 20px; margin: 5px; }
-  .guess-input input { font-size: 1.5em; text-align: center; width: 120px; }
-  .meta { font-size: 1.2em; margin-bottom: 10px; }
-  .footer { margin-top: 20px; font-size: 0.9em; color: #666; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+         display:flex; flex-direction:column; align-items:center; background:#f4f4f4; margin:0; padding:24px; }
+  h1 { margin: 0 0 8px 0; }
+  .topbar { display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+  .btn { cursor:pointer; border:none; border-radius:10px; padding:10px 14px; background:#222; color:#fff; font-weight:600; }
+  .btn:disabled { opacity:.6; cursor:not-allowed; }
+  .character { font-size:84px; margin-top:28px; }
+  .meta { margin-top:8px; font-size:14px; color:#444; min-height:1.2em; }
+  .guess-input { margin-top:16px; display:flex; gap:10px; }
+  input { font-size:24px; text-align:center; padding:10px; width:100px; border-radius:10px; border:1px solid #ccc; }
+  .attempts { margin-top:10px; }
+  .feedback { display:flex; margin-top:12px; flex-wrap:wrap; }
+  .tile { width:56px; height:56px; display:flex; align-items:center; justify-content:center; font-size:30px; margin:5px; background:#ddd; border-radius:8px; }
+  .correct { background:#6aaa64; color:#fff; }
+  .misplaced { background:#c9b458; color:#fff; }
+  .wrong { background:#787c7e; color:#fff; }
+  #result { margin-top:12px; font-weight:700; min-height:1.2em; }
+  .footer { margin-top:16px; font-size:15px; color:#222; }
 </style>
 </head>
 <body>
+  <h1>HANZIDLE</h1>
+  <div class="topbar">
+    <button class="btn" id="newWordBtn">New Challenge</button>
+    <button class="btn" id="resetBtn">Reset</button>
+    <button class="btn" id="revealBtn">Reveal</button>
+    <button class="btn" id="hintBtn">Hint</button>
+  </div>
 
-<h1>HANZIDLE</h1>
+  <div class="character" id="givenChar">海</div>
+  <div class="meta" id="hint">Guess the 2-character word that includes the big character.</div>
 
-<div class="topbar">
-  <button class="btn" id="newWordBtn">New Challenge</button>
-  <button class="btn" id="resetBtn">Reset</button>
-</div>
+  <div class="guess-input">
+    <input id="guess" maxlength="2" placeholder="输入两个字" />
+    <button class="btn" id="submitBtn">Submit</button>
+  </div>
+  <div class="attempts">Attempts left: <span id="attempts">5</span></div>
 
-<div class="character" id="givenChar">海</div>
-<div class="meta" id="hint">Guess the 2-character word that includes the big character.</div>
-
-<div class="guess-input">
-  <input id="guess" maxlength="2" placeholder="输入两个字" />
-  <button class="btn" id="submitBtn" onclick="makeGuess()">Submit</button>
-  <button class="btn" id="revealBtn" onclick="revealAnswer()">Reveal</button>
-</div>
-
-<div class="attempts">Attempts left: <span id="attempts">5</span></div>
-
-<div id="feedback"></div>
-<div id="result"></div>
-<div class="footer" id="reveal"></div>
+  <div id="feedback"></div>
+  <div id="result"></div>
+  <div class="footer" id="reveal"></div>
 
 <script>
-let WORDS = [];
-let state = { target: null, attempts: 5, finished: false };
+  let WORDS = [];
+  const $ = (id) => document.getElementById(id);
+  const attemptsEl = $('attempts');
+  const feedbackEl = $('feedback');
+  const resultEl = $('result');
+  const revealEl = $('reveal');
+  const hintTextEl = $('hint');
+  const guessInput = $('guess');
+  const submitBtn = $('submitBtn');
+  const givenCharEl = $('givenChar');
+  const revealBtn = $('revealBtn');
+  const hintBtn = $('hintBtn');
 
-// Unlock iOS speech on first user interaction
-function unlockSpeechOnce() {
-  if (!('speechSynthesis' in window)) return;
-  const u = new SpeechSynthesisUtterance(' ');
-  u.volume = 0; 
-  speechSynthesis.speak(u);
-  document.removeEventListener('touchend', unlockSpeechOnce);
-  document.removeEventListener('click', unlockSpeechOnce);
-}
-document.addEventListener('touchend', unlockSpeechOnce, { once: true });
-document.addEventListener('click', unlockSpeechOnce, { once: true });
+  let state = { target: null, attempts: 5, finished: false };
 
-// Speak Mandarin word once
-function speakMandarin(text) {
-  if (!('speechSynthesis' in window)) return;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'zh-CN';
-  speechSynthesis.speak(utterance);
-}
+  // Unlock iOS speech on first user interaction
+  function unlockSpeechOnce() {
+    if (!('speechSynthesis' in window)) return;
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0;
+    speechSynthesis.speak(u);
+    document.removeEventListener('touchend', unlockSpeechOnce);
+    document.removeEventListener('click', unlockSpeechOnce);
+  }
+  document.addEventListener('touchend', unlockSpeechOnce, { once: true });
+  document.addEventListener('click', unlockSpeechOnce, { once: true });
 
-// Fetch JSON word bank
-fetch('words.json')
-  .then(res => res.json())
-  .then(data => {
-    WORDS = data;
-    newChallenge();
-  })
-  .catch(err => console.error('Error loading words.json:', err));
+  function speakMandarin(text) {
+    if (!('speechSynthesis' in window)) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    speechSynthesis.speak(utterance);
+  }
 
-function newChallenge() {
-  const randomIndex = Math.floor(Math.random() * WORDS.length);
-  state.target = WORDS[randomIndex];
-  state.attempts = 5;
-  state.finished = false;
-  document.getElementById('givenChar').textContent = state.target.given;
-  document.getElementById('hint').textContent = "Guess the 2-character word that includes the big character.";
-  document.getElementById('attempts').textContent = state.attempts;
-  document.getElementById('feedback').textContent = "";
-  document.getElementById('result').textContent = "";
-  document.getElementById('guess').value = "";
-}
+  // Load words.json
+  fetch('words.json')
+    .then(res => res.json())
+    .then(data => {
+      WORDS = data;
+      setTarget(pickWord());
+    })
+    .catch(err => console.error('Error loading words.json:', err));
 
-function makeGuess() {
-  if (state.finished) return;
-  const guess = document.getElementById('guess').value.trim();
-  if (!guess) return;
+  function pickWord() {
+    return WORDS[Math.floor(Math.random() * WORDS.length)];
+  }
 
-  if (guess === state.target.word) {
-    document.getElementById('result').textContent = `✅ Correct! ${state.target.word} (${state.target.pinyin}) - ${state.target.def}`;
-    speakMandarin(state.target.word);
-    state.finished = true;
-    return;
-  } else {
-    state.attempts--;
-    document.getElementById('attempts').textContent = state.attempts;
-    document.getElementById('feedback').textContent = "❌ Try again.";
-    if (state.attempts <= 0) {
-      revealAnswer();
+  function setTarget(w) {
+    state.target = w;
+    givenCharEl.textContent = w.given;
+    hintTextEl.textContent = 'Guess the 2-character word that includes: ' + w.given;
+    reset(false);
+  }
+
+  function reset(clearWord = true) {
+    state.attempts = 5;
+    state.finished = false;
+    attemptsEl.textContent = state.attempts;
+    feedbackEl.innerHTML = '';
+    resultEl.textContent = '';
+    revealEl.textContent = '';
+    submitBtn.disabled = false;
+    guessInput.disabled = false;
+    revealBtn.disabled = false;
+    hintBtn.disabled = false;
+    guessInput.value = '';
+    guessInput.focus();
+    if (clearWord) setTarget(pickWord());
+  }
+
+  function colorRow(guess, answer) {
+    const row = document.createElement('div');
+    row.className = 'feedback';
+    for (let i = 0; i < 2; i++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.textContent = guess[i];
+      if (guess[i] === answer[i]) tile.classList.add('correct');
+      else if (answer.includes(guess[i])) tile.classList.add('misplaced');
+      else tile.classList.add('wrong');
+      row.appendChild(tile);
     }
+    feedbackEl.appendChild(row);
   }
-}
 
-function revealAnswer() {
-  if (state.finished) return;
-  document.getElementById('result').textContent = `💡 The answer was: ${state.target.word} (${state.target.pinyin}) - ${state.target.def}`;
-  speakMandarin(state.target.word);
-  state.finished = true;
-}
+  function showMessage(msg) { resultEl.textContent = msg; }
 
-document.getElementById('newWordBtn').addEventListener('click', newChallenge);
-document.getElementById('resetBtn').addEventListener('click', newChallenge);
-
-// Allow Enter key to submit the guess
-document.getElementById('guess').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    makeGuess();
+  function reveal() {
+    const { word, pinyin, def } = state.target;
+    revealEl.textContent = `${word}  ·  ${pinyin}  ·  ${def}`;
   }
-});
+
+  function revealNow() {
+    if (state.finished) return;
+    showMessage('👀 Revealed');
+    reveal();
+    speakMandarin(state.target.word);
+    endGame();
+  }
+
+  function showHint() {
+    if (state.finished) return;
+    const hintText = `Hint: ${state.target.def}`;
+    hintTextEl.textContent = hintText;
+    hintBtn.disabled = true;
+  }
+
+  function makeGuess() {
+    if (state.finished) return;
+    const raw = guessInput.value.trim();
+    if (raw.length !== 2) return showMessage('Please enter exactly two Chinese characters.');
+    if (!raw.includes(state.target.given)) return showMessage('Your guess must include: ' + state.target.given);
+
+    colorRow(raw, state.target.word);
+    state.attempts--;
+    attemptsEl.textContent = state.attempts;
+
+    if (raw === state.target.word) {
+      showMessage('🎉 Correct!');
+      reveal();
+      speakMandarin(state.target.word);
+      endGame();
+      return;
+    }
+
+    if (state.attempts <= 0) {
+      showMessage('❌ Out of attempts!');
+      reveal();
+      speakMandarin(state.target.word);
+      endGame();
+      return;
+    }
+
+    guessInput.value = '';
+    guessInput.focus();
+  }
+
+  function endGame() {
+    state.finished = true;
+    submitBtn.disabled = true;
+    guessInput.disabled = true;
+    revealBtn.disabled = true;
+    hintBtn.disabled = true;
+  }
+
+  // Events
+  submitBtn.addEventListener('click', makeGuess);
+  guessInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') makeGuess(); });
+  $('newWordBtn').addEventListener('click', () => setTarget(pickWord()));
+  $('resetBtn').addEventListener('click', () => reset(true));
+  revealBtn.addEventListener('click', revealNow);
+  hintBtn.addEventListener('click', showHint);
 </script>
-
 </body>
 </html>
