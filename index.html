@@ -10,6 +10,7 @@
   h1 { margin: 0 0 8px 0; }
   .topbar { display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap; }
   .btn { cursor:pointer; border:none; border-radius:10px; padding:10px 14px; background:#222; color:#fff; font-weight:600; }
+  .btn.secondary { background:#555; }
   .btn:disabled { opacity:.6; cursor:not-allowed; }
   .character { font-size:84px; margin-top:28px; }
   .meta { margin-top:8px; font-size:14px; color:#444; min-height:1.2em; }
@@ -23,6 +24,8 @@
   .wrong { background:#787c7e; color:#fff; }
   #result { margin-top:12px; font-weight:700; min-height:1.2em; }
   .footer { margin-top:16px; font-size:15px; color:#222; }
+  #hearBtn { display:none; } /* only show after reveal/correct */
+  #audioStatus { font-size:12px; color:#666; margin-top:6px; min-height:1em; }
 </style>
 </head>
 <body>
@@ -32,6 +35,7 @@
     <button class="btn" id="resetBtn">Reset</button>
     <button class="btn" id="revealBtn">Reveal</button>
     <button class="btn" id="hintBtn">Hint</button>
+    <button class="btn secondary" id="testAudioBtn">Test audio 🔊</button>
   </div>
 
   <div class="character" id="givenChar">海</div>
@@ -46,6 +50,8 @@
   <div id="feedback"></div>
   <div id="result"></div>
   <div class="footer" id="reveal"></div>
+  <button class="btn" id="hearBtn">🔊 Hear word</button>
+  <div id="audioStatus"></div>
 
 <script>
   let WORDS = [];
@@ -60,14 +66,49 @@
   const givenCharEl = $('givenChar');
   const revealBtn = $('revealBtn');
   const hintBtn = $('hintBtn');
+  const hearBtn = $('hearBtn');
+  const testAudioBtn = $('testAudioBtn');
+  const audioStatus = $('audioStatus');
 
   let state = { target: null, attempts: 5, finished: false };
+  let speechUnlocked = false;
+  let zhVoice = null;
 
-  // Unlock iOS speech on first user interaction
+  // --- Voice selection helpers ---
+  function chooseZhVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = speechSynthesis.getVoices() || [];
+    // Prefer zh-CN, then any zh
+    const exact = voices.find(v => (v.lang || '').toLowerCase() === 'zh-cn');
+    if (exact) return exact;
+    const anyZh = voices.find(v => (v.lang || '').toLowerCase().startsWith('zh'));
+    return anyZh || null;
+  }
+
+  function ensureVoiceReady(callback) {
+    if (!('speechSynthesis' in window)) return callback();
+    if (speechSynthesis.getVoices().length) {
+      zhVoice = chooseZhVoice();
+      callback();
+    } else {
+      // iOS often fires voiceschanged asynchronously
+      speechSynthesis.onvoiceschanged = () => {
+        zhVoice = chooseZhVoice();
+        callback();
+      };
+    }
+  }
+
+  // --- iOS unlock (must follow a user gesture) ---
   function unlockSpeechOnce() {
     if (!('speechSynthesis' in window)) return;
+    // Fire a silent utterance to satisfy iOS
     const u = new SpeechSynthesisUtterance(' ');
     u.volume = 0;
+    u.onend = () => {
+      speechUnlocked = true;
+      audioStatus.textContent = 'Audio ready. If you still hear nothing on iPhone, turn off Silent Mode and raise volume.';
+    };
     speechSynthesis.speak(u);
     document.removeEventListener('touchend', unlockSpeechOnce);
     document.removeEventListener('click', unlockSpeechOnce);
@@ -77,8 +118,17 @@
 
   function speakMandarin(text) {
     if (!('speechSynthesis' in window)) return;
+    // If not yet unlocked, require a user gesture first
+    if (!speechUnlocked) {
+      audioStatus.textContent = 'Tap anywhere or press "Test audio" to enable sound on iPhone.';
+      return;
+    }
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN';
+    if (zhVoice) utterance.voice = zhVoice;
+    // Slightly slower for clarity; tweak if you prefer
+    utterance.rate = 0.95;
+    speechSynthesis.cancel(); // stop anything queued
     speechSynthesis.speak(utterance);
   }
 
@@ -87,7 +137,7 @@
     .then(res => res.json())
     .then(data => {
       WORDS = data;
-      setTarget(pickWord());
+      ensureVoiceReady(() => setTarget(pickWord()));
     })
     .catch(err => console.error('Error loading words.json:', err));
 
@@ -113,8 +163,10 @@
     guessInput.disabled = false;
     revealBtn.disabled = false;
     hintBtn.disabled = false;
+    hearBtn.style.display = 'none';
     guessInput.value = '';
     guessInput.focus();
+    audioStatus.textContent = '';
     if (clearWord) setTarget(pickWord());
   }
 
@@ -144,8 +196,8 @@
     if (state.finished) return;
     showMessage('👀 Revealed');
     reveal();
+    endGame(true); // show hear button
     speakMandarin(state.target.word);
-    endGame();
   }
 
   function showHint() {
@@ -168,16 +220,16 @@
     if (raw === state.target.word) {
       showMessage('🎉 Correct!');
       reveal();
+      endGame(true); // show hear button
       speakMandarin(state.target.word);
-      endGame();
       return;
     }
 
     if (state.attempts <= 0) {
       showMessage('❌ Out of attempts!');
       reveal();
+      endGame(true); // show hear button
       speakMandarin(state.target.word);
-      endGame();
       return;
     }
 
@@ -185,12 +237,13 @@
     guessInput.focus();
   }
 
-  function endGame() {
+  function endGame(showHear=false) {
     state.finished = true;
     submitBtn.disabled = true;
     guessInput.disabled = true;
     revealBtn.disabled = true;
     hintBtn.disabled = true;
+    if (showHear) hearBtn.style.display = 'inline-block';
   }
 
   // Events
@@ -200,6 +253,14 @@
   $('resetBtn').addEventListener('click', () => reset(true));
   revealBtn.addEventListener('click', revealNow);
   hintBtn.addEventListener('click', showHint);
+  hearBtn.addEventListener('click', () => speakMandarin(state.target.word));
+  testAudioBtn.addEventListener('click', () => {
+    unlockSpeechOnce(); // in case user missed the first tap
+    ensureVoiceReady(() => {
+      speechUnlocked = true;
+      speakMandarin('测试');
+    });
+  });
 </script>
 </body>
 </html>
